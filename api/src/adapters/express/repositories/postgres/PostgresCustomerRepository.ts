@@ -3,7 +3,9 @@ import { ICustomerRepository } from "../../../../entities/interfaces/ICustomerRe
 import { Customer } from "../../../../entities/Customer";
 import { CustomerData } from "../../../../entities/CustomerData";
 import { Database } from "./Database";
+import { injectable } from "tsyringe";
 
+@injectable()
 export class PostgresCustomerRepository implements ICustomerRepository {
   private database: Database;
 
