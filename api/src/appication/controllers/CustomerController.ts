@@ -5,11 +5,13 @@ import { CreateCustomerService } from "../../usecases/customer/CreateCustomerSer
 import { ListCustomersService } from "../../usecases/customer/ListCustomersService";
 import { OptimizeRouteService } from "../../usecases/customer/OptimizeRouteService";
 import { CustomerOutput } from "../dtos/CustomerOutput";
+import { inject, injectable } from "tsyringe";
 
+@injectable()
 export class CustomerController {
   private repository: ICustomerRepository;
 
-  constructor(repository: ICustomerRepository) {
+  constructor(@inject("ICustomerRepository") repository: ICustomerRepository) {
     this.repository = repository;
   }
 
