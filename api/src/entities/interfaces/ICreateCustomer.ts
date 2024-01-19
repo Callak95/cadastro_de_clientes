@@ -1,6 +1,6 @@
 import { CreateCustomerInput } from "../../appication/dtos/CreateCustomerInput";
-import { CustomerOutput } from "../../appication/dtos/CustomerOutput";
+import { Customer } from "../Customer";
 
 export interface ICreateCustomer {
-  execute(input: CreateCustomerInput): Promise<CustomerOutput>;
+  execute(input: CreateCustomerInput): Promise<Customer>;
 }

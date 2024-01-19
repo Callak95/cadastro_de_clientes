@@ -1,5 +1,5 @@
-import { CustomerOutput } from "../../appication/dtos/CustomerOutput";
+import { Customer } from "../Customer";
 
 export interface IListCustomersService {
-  execute(): Promise<CustomerOutput[]>;
+  execute(): Promise<Customer[]>;
 }
