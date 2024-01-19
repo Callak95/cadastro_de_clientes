@@ -1,3 +1,5 @@
+import { v4 as uuid4 } from "uuid";
+
 export class Customer {
   constructor(
     public readonly id?: string,
@@ -6,11 +8,12 @@ export class Customer {
     public readonly xCoord?: number,
     public readonly yCoord?: number
   ) {
+    this.id = id ?? uuid4().toString();
     this.validateFields();
   }
 
   private validateFields(): void {
-    if (!this.id || !this.name || !this.email) {
+    if (!this.name || !this.email) {
       throw new Error("Todos os campos são obrigatórios");
     }
 
