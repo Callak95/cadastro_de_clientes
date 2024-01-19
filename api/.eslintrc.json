@@ -8,7 +8,7 @@
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module",
-    "project": "./api/tsconfig.json" // Remover o api após o ambiente de desenvolvimento
+    "project": "./tsconfig.json"
   },
   "plugins": ["@typescript-eslint"],
   "rules": {}
