@@ -1,17 +1,18 @@
-import { Pool, QueryResult } from "pg";
+import { QueryResult } from "pg";
 import { ICustomerRepository } from "../../../../entities/interfaces/ICustomerRepository";
 import { Customer } from "../../../../entities/Customer";
 import { CustomerData } from "../../../../entities/CustomerData";
+import Database from "./Database";
 
 export class PostgresCustomerRepository implements ICustomerRepository {
-  private pool: Pool;
+  private database: Database;
 
-  constructor(pool: Pool) {
-    this.pool = pool;
+  constructor(database: Database) {
+    this.database = database;
   }
 
   async createCustomer(customerData: CustomerData): Promise<Customer> {
-    const { rows }: QueryResult = await this.pool.query(
+    const result: QueryResult<Customer> = await this.database.query(
       "INSERT INTO customers (id, name, email, xCoord, yCoord) VALUES ($1, $2, $3, $4, $5) RETURNING *",
       [
         customerData.id,
@@ -22,23 +23,23 @@ export class PostgresCustomerRepository implements ICustomerRepository {
       ]
     );
 
-    return rows[0];
+    return result.rows[0];
   }
 
   async getCustomerById(id: string): Promise<Customer | null> {
-    const { rows }: QueryResult = await this.pool.query(
+    const result: QueryResult<Customer> = await this.database.query(
       "SELECT * FROM customers WHERE id = $1",
       [id]
     );
 
-    return rows[0] || null;
+    return result.rows[0] || null;
   }
 
   async getAllCustomers(): Promise<Customer[]> {
-    const { rows }: QueryResult = await this.pool.query(
+    const result: QueryResult<Customer> = await this.database.query(
       "SELECT * FROM customers"
     );
 
-    return rows;
+    return result.rows;
   }
 }

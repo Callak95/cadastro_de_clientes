@@ -1,3 +1,4 @@
+import { CreateCustomerInput } from "../../../appication/dtos/CreateCustomerInput";
 import { CustomerOutput } from "../../../appication/dtos/CustomerOutput";
 import { Customer } from "../../../entities/Customer";
 import { CustomerData } from "../../../entities/CustomerData";
@@ -31,5 +32,16 @@ export class CustomerMapper {
       xCoord: entity.xCoord,
       yCoord: entity.yCoord,
     };
+  }
+
+  static toCreateCustomerInput(requestBody: {
+    id?: string;
+    name?: string;
+    email?: string;
+    xCoord?: number;
+    yCoord?: number;
+  }): CreateCustomerInput {
+    const { id, name, email, xCoord, yCoord } = requestBody;
+    return { id, name, email, xCoord, yCoord };
   }
 }
