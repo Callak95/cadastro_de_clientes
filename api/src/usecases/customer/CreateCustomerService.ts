@@ -3,7 +3,7 @@ import { Customer } from "../../entities/Customer";
 import { ICreateCustomer } from "../../entities/interfaces/ICreateCustomer";
 import { ICustomerRepository } from "../../entities/interfaces/ICustomerRepository";
 
-export class CreateCustomer implements ICreateCustomer {
+export class CreateCustomerService implements ICreateCustomer {
   constructor(private readonly customerRepository: ICustomerRepository) {}
 
   public async execute(input: CreateCustomerInput): Promise<Customer> {
