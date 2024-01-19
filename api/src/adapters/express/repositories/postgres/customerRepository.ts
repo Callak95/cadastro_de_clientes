@@ -1,5 +1,5 @@
 import { Pool, QueryResult } from "pg";
-import { ICustomerRepository } from "../../../../entities/ICustomerRepository";
+import { ICustomerRepository } from "../../../../entities/interfaces/ICustomerRepository";
 import { Customer } from "../../../../entities/Customer";
 import { CustomerData } from "../../../../entities/CustomerData";
 
