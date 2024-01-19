@@ -2,7 +2,7 @@ import { QueryResult } from "pg";
 import { ICustomerRepository } from "../../../../entities/interfaces/ICustomerRepository";
 import { Customer } from "../../../../entities/Customer";
 import { CustomerData } from "../../../../entities/CustomerData";
-import Database from "./Database";
+import { Database } from "./Database";
 
 export class PostgresCustomerRepository implements ICustomerRepository {
   private database: Database;
