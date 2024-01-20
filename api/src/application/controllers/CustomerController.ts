@@ -1,10 +1,10 @@
 import { Request } from "express";
 import { CustomerMapper } from "../../adapters/express/mappers/CustomerMapper";
-import { CustomerOutput } from "../dtos/CustomerOutput";
 import { inject, injectable } from "tsyringe";
 import { ICreateCustomerService } from "../../entities/interfaces/ICreateCustomerService";
 import { IOptimizeRouteService } from "../../entities/interfaces/IOptimizeRouteService";
 import { IListCustomersService } from "../../entities/interfaces/IListCustomersService";
+import { CustomerOutput } from "../dtos/CustomerOutput";
 
 @injectable()
 export class CustomerController {
@@ -39,7 +39,9 @@ export class CustomerController {
     return customers.map((customer) => CustomerMapper.toDTO(customer));
   }
 
-  public async optimizeRoute(): Promise<string[]> {
-    return await this.optimizeRouteService.execute();
+  public async optimizeRoute(): Promise<CustomerOutput[]> {
+    const customers = await this.optimizeRouteService.execute();
+
+    return customers.map((customer) => CustomerMapper.toDTO(customer));
   }
 }

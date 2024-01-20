@@ -1,5 +1,5 @@
-import { CreateCustomerInput } from "../../../appication/dtos/CreateCustomerInput";
-import { CustomerOutput } from "../../../appication/dtos/CustomerOutput";
+import { CreateCustomerInput } from "../../../application/dtos/CreateCustomerInput";
+import { CustomerOutput } from "../../../application/dtos/CustomerOutput";
 import { Customer } from "../../../entities/Customer";
 import { CustomerData } from "../../../entities/CustomerData";
 
