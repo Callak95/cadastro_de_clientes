@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 100%;
   height: auto;
   align-self: center;
   justify-content: center;
@@ -53,6 +53,28 @@ export const Form = styled.form`
     span,
     input {
       margin-top: 1rem;
+      font-size: 0.7rem;
+    }
+
+    @media (min-width: 576px) {
+      span,
+      input {
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      span,
+      input {
+        font-size: 1rem;
+      }
+    }
+
+    @media (min-width: 992px) {
+      span,
+      input {
+        font-size: 1.2rem;
+      }
     }
   }
 
