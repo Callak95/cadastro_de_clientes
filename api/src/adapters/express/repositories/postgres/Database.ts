@@ -1,4 +1,7 @@
+import { config } from "dotenv";
 import { Pool, QueryResult, PoolClient } from "pg";
+
+config();
 
 const dbPortStr = process.env.DB_PORT ?? "5432";
 
