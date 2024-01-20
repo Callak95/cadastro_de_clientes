@@ -4,6 +4,7 @@ import CustomerForm from "../../components/CustomerForm";
 import OptimizeRouteButton from "../../components/OptimizeRouteButtom";
 import { Customer } from "../../types/customer";
 import { Container, Title } from "./styles";
+import { CustomerMap } from "../../components/CustomerMap";
 
 export const HomePage: FC = () => {
   const customers: Customer[] = [
@@ -20,6 +21,13 @@ export const HomePage: FC = () => {
       email: "client1@email.com",
       xCoord: "15",
       yCoord: "20",
+    },
+    {
+      id: "",
+      name: "Cliente 3",
+      email: "client1@email.com",
+      xCoord: "200",
+      yCoord: "255",
     },
   ];
 
@@ -47,6 +55,11 @@ export const HomePage: FC = () => {
 
       {/* Componente para otimizar a rota */}
       <OptimizeRouteButton onClick={handleOptimizeRoute} />
+
+      <div>
+        <h1>Mapa de Clientes</h1>
+        <CustomerMap customers={customers} />
+      </div>
     </Container>
   );
 };

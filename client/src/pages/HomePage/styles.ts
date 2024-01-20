@@ -8,6 +8,8 @@ export const Container = styled.div`
   padding-right: 15px;
   padding-left: 15px;
 
+  background-color: beige;
+
   @media (min-width: 576px) {
     max-width: 540px;
   }
