@@ -1,9 +1,9 @@
 import { Request } from "express";
+import { injectable, inject } from "tsyringe";
 import { CustomerMapper } from "../../adapters/express/mappers/CustomerMapper";
-import { inject, injectable } from "tsyringe";
 import { ICreateCustomerService } from "../../entities/interfaces/ICreateCustomerService";
-import { IOptimizeRouteService } from "../../entities/interfaces/IOptimizeRouteService";
 import { IListCustomersService } from "../../entities/interfaces/IListCustomersService";
+import { IOptimizeRouteService } from "../../entities/interfaces/IOptimizeRouteService";
 import { CustomerOutput } from "../dtos/CustomerOutput";
 
 @injectable()
@@ -13,11 +13,11 @@ export class CustomerController {
   private readonly optimizeRouteService: IOptimizeRouteService;
 
   constructor(
-    @inject("CreateCustomerService")
+    @inject("ICreateCustomerService")
     createCustomerService: ICreateCustomerService,
-    @inject("ListCustomersService")
+    @inject("IListCustomersService")
     listCustomersService: IListCustomersService,
-    @inject("OptimizeRouteService")
+    @inject("IOptimizeRouteService")
     optimizeRouteService: IOptimizeRouteService
   ) {
     this.createCustomerService = createCustomerService;
