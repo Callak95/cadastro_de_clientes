@@ -1,39 +1,44 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import CustomerList from "../../components/CustomerList";
-import CustomerForm from "../../components/CustomerForm";
+import { CustomerForm } from "../../components/CustomerForm";
 import OptimizeRouteButton from "../../components/OptimizeRouteButtom";
-import { Customer } from "../../types/customer";
 import { Container, Title } from "./styles";
 import { CustomerMap } from "../../components/CustomerMap";
+import { useDispatch, useSelector } from "react-redux";
+import { setCustomers } from "../../features/customer/customerSlice";
+import { customerService } from "../../services/customerService";
+import { RootState } from "../../features";
 
 export const HomePage: FC = () => {
-  const customers: Customer[] = [
-    {
-      id: "",
-      name: "Cliente 1",
-      email: "client1@email.com",
-      xCoord: "10",
-      yCoord: "15",
-    },
-    {
-      id: "",
-      name: "Cliente 2",
-      email: "client1@email.com",
-      xCoord: "15",
-      yCoord: "20",
-    },
-    {
-      id: "",
-      name: "Cliente 3",
-      email: "client1@email.com",
-      xCoord: "200",
-      yCoord: "255",
-    },
-  ];
+  const dispatch = useDispatch();
+  const customers = useSelector((state: RootState) => state.customer.customers);
 
-  const handleSubmit = (formData: FormData) => {
-    // Lógica para lidar com os dados do formulário
-    console.log("Dados do formulário:", formData);
+  useEffect(() => {
+    // Buscar clientes da API e atualizar o estado do Redux
+    const fetchCustomers = async () => {
+      try {
+        const response = await customerService.listCustomers();
+        dispatch(setCustomers(response));
+      } catch (error) {
+        console.error("Erro ao buscar clientes:", error);
+      }
+    };
+
+    fetchCustomers();
+  }, [dispatch]);
+
+  const handleSubmit = async (formData: FormData) => {
+    try {
+      const response = await customerService.createCustomer({
+        name: formData.get("name") as string,
+        email: formData.get("email") as string,
+        xCoord: parseFloat(formData.get("xCoord") as string),
+        yCoord: parseFloat(formData.get("yCoord") as string),
+      });
+      console.log(response);
+    } catch (error) {
+      console.error("Erro ao cadastrar clientes:", error);
+    }
   };
 
   const handleOptimizeRoute = () => {
