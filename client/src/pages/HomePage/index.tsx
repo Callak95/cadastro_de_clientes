@@ -41,9 +41,14 @@ export const HomePage: FC = () => {
     }
   };
 
-  const handleOptimizeRoute = () => {
-    // Lógica para otimizar a rota
-    console.log("Rota otimizada!");
+  const handleOptimizeRoute = async () => {
+    try {
+      const optimizedCustomers = await customerService.optimizeRoute();
+      dispatch(setCustomers(optimizedCustomers));
+      console.log("Rota otimizada!", optimizedCustomers);
+    } catch (error) {
+      console.error("Erro ao otimizar a rota:", error);
+    }
   };
 
   return (
