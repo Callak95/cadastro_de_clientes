@@ -1,3 +1,5 @@
+import { Customer } from "../Customer";
+
 export interface IOptimizeRouteService {
-  execute(): Promise<string[]>;
+  execute(): Promise<Customer[]>;
 }

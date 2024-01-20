@@ -11,19 +11,15 @@ export class OptimizeRouteService implements IOptimizeRouteService {
     this.repository = repository;
   }
 
-  public async execute(): Promise<string[]> {
-    // Obtém a lista de clientes do repositório
+  public async execute(): Promise<Customer[]> {
     const customers = await this.repository.getAllCustomers();
+    return this.optimizeRoute(customers);
+  }
 
-    // Verifica se há clientes suficientes para otimização
-    if (customers.length < 2) {
-      throw new Error("Não há clientes suficientes para otimizar a rota.");
-    }
-
-    // Encontra a rota mais curta
+  public optimizeRoute(customers: Customer[]): Customer[] {
     const optimizedRoute = this.findShortestRoute(customers);
 
-    return optimizedRoute;
+    return optimizedRoute.map((index) => customers[index]);
   }
 
   private calculateDistance(
@@ -37,41 +33,19 @@ export class OptimizeRouteService implements IOptimizeRouteService {
     return Math.sqrt(deltaX ** 2 + deltaY ** 2);
   }
 
-  private findShortestRoute(customers: Customer[]): string[] {
-    // Implementa o algoritmo de força bruta para encontrar a rota mais curta
-    // Pode ser substituído por algoritmos mais eficientes para números grandes de clientes
-
+  private findShortestRoute(customers: Customer[]): number[] {
     const permutations = this.permute(
       customers.map((customer, index) => index)
     );
-    let shortestRoute: string[] | null = null;
+    let shortestRoute: number[] | null = null;
     let shortestDistance = Infinity;
 
     for (const permutation of permutations) {
-      const route: string[] = [];
-      let routeValid = true;
+      const totalDistance = this.calculateTotalDistance(customers, permutation);
 
-      for (const index of permutation) {
-        const customer = customers[index];
-
-        if (customer && customer.name) {
-          route.push(customer.name);
-        } else {
-          routeValid = false;
-          break;
-        }
-      }
-
-      if (routeValid) {
-        const totalDistance = this.calculateTotalDistance(
-          customers,
-          permutation
-        );
-
-        if (totalDistance < shortestDistance) {
-          shortestRoute = route;
-          shortestDistance = totalDistance;
-        }
+      if (totalDistance < shortestDistance) {
+        shortestRoute = permutation;
+        shortestDistance = totalDistance;
       }
     }
 
@@ -126,7 +100,7 @@ export class OptimizeRouteService implements IOptimizeRouteService {
       for (let i = start; i < array.length; i++) {
         [array[start], array[i]] = [array[i], array[start]];
         generatePermutations(array, start + 1);
-        [array[start], array[i]] = [array[i], array[start]]; // Desfaz a troca para continuar a busca
+        [array[start], array[i]] = [array[i], array[start]];
       }
     };
 
