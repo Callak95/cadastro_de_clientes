@@ -1,6 +1,7 @@
 import "reflect-metadata";
 
 import express from "express";
+import cors from "cors";
 import bodyParser from "body-parser";
 import { config } from "dotenv";
 import customerRoutes from "./adapters/express/routes/customerRoutes";
@@ -8,6 +9,8 @@ import customerRoutes from "./adapters/express/routes/customerRoutes";
 config();
 
 const app = express();
+
+app.use(cors());
 
 const port = process.env.PORT || 8000;
 
