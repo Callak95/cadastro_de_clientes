@@ -1,7 +1,14 @@
 import { FC } from "react";
+import { AppRoutes } from "./routes";
+import { Provider } from "react-redux";
+import { store } from "./features";
 
 const App: FC = () => {
-  return <h1>App</h1>;
+  return (
+    <Provider store={store}>
+      <AppRoutes />
+    </Provider>
+  );
 };
 
 export default App;
