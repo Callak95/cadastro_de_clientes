@@ -1,13 +1,31 @@
 import { container } from "tsyringe";
 import express, { Request, Response } from "express";
-import { CustomerController } from "../../../appication/controllers/CustomerController";
 import { ICustomerRepository } from "../../../entities/interfaces/ICustomerRepository";
 import { PostgresCustomerRepository } from "../repositories/postgres/PostgresCustomerRepository";
+import { CustomerController } from "../../../application/controllers/CustomerController";
+import { CreateCustomerService } from "../../../usecases/customer/CreateCustomerService";
+import { ListCustomersService } from "../../../usecases/customer/ListCustomersService";
+import { OptimizeRouteService } from "../../../usecases/customer/OptimizeRouteService";
+import { ICreateCustomerService } from "../../../entities/interfaces/ICreateCustomerService";
+import { IListCustomersService } from "../../../entities/interfaces/IListCustomersService";
+import { IOptimizeRouteService } from "../../../entities/interfaces/IOptimizeRouteService";
 
 const router = express.Router();
 
 container.register<ICustomerRepository>("ICustomerRepository", {
   useClass: PostgresCustomerRepository,
+});
+
+container.register<ICreateCustomerService>("ICreateCustomerService", {
+  useClass: CreateCustomerService,
+});
+
+container.register<IListCustomersService>("IListCustomersService", {
+  useClass: ListCustomersService,
+});
+
+container.register<IOptimizeRouteService>("IOptimizeRouteService", {
+  useClass: OptimizeRouteService,
 });
 
 const controller = container.resolve(CustomerController);

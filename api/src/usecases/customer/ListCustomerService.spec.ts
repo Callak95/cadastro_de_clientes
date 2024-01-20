@@ -1,3 +1,5 @@
+import "reflect-metadata";
+
 import { describe, expect, it, vi } from "vitest";
 import { MockCustomerRepository } from "../../adapters/express/repositories/postgres/MockCustomerRepository";
 import { Customer } from "../../entities/Customer";

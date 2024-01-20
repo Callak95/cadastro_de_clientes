@@ -1,3 +1,5 @@
+import "reflect-metadata";
+
 import { CreateCustomerService } from "./CreateCustomerService";
 import { CreateCustomerInput } from "../../appication/dtos/CreateCustomerInput";
 import { describe, expect, it } from "vitest";

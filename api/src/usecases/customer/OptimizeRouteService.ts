@@ -1,9 +1,15 @@
+import { inject, injectable } from "tsyringe";
 import { Customer } from "../../entities/Customer";
 import { ICustomerRepository } from "../../entities/interfaces/ICustomerRepository";
 import { IOptimizeRouteService } from "../../entities/interfaces/IOptimizeRouteService";
 
+@injectable()
 export class OptimizeRouteService implements IOptimizeRouteService {
-  constructor(private readonly repository: ICustomerRepository) {}
+  private readonly repository: ICustomerRepository;
+
+  constructor(@inject("ICustomerRepository") repository: ICustomerRepository) {
+    this.repository = repository;
+  }
 
   public async execute(): Promise<string[]> {
     // Obtém a lista de clientes do repositório

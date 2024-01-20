@@ -1,10 +1,18 @@
-import { CreateCustomerInput } from "../../appication/dtos/CreateCustomerInput";
+import { inject, injectable } from "tsyringe";
+import { CreateCustomerInput } from "../../application/dtos/CreateCustomerInput";
 import { Customer } from "../../entities/Customer";
-import { ICreateCustomer } from "../../entities/interfaces/ICreateCustomer";
 import { ICustomerRepository } from "../../entities/interfaces/ICustomerRepository";
+import { ICreateCustomerService } from "../../entities/interfaces/ICreateCustomerService";
 
-export class CreateCustomerService implements ICreateCustomer {
-  constructor(private readonly customerRepository: ICustomerRepository) {}
+@injectable()
+export class CreateCustomerService implements ICreateCustomerService {
+  private readonly customerRepository: ICustomerRepository;
+
+  constructor(
+    @inject("ICustomerRepository") customerRepository: ICustomerRepository
+  ) {
+    this.customerRepository = customerRepository;
+  }
 
   public async execute(input: CreateCustomerInput): Promise<Customer> {
     const { name, email, xCoord, yCoord } = input;

@@ -1,3 +1,5 @@
+import "reflect-metadata"
+
 import { describe, expect, it } from "vitest";
 import { OptimizeRouteService } from "./OptimizeRouteService";
 import { MockCustomerRepository } from "../../adapters/express/repositories/postgres/MockCustomerRepository";

@@ -1,15 +1,35 @@
-import { describe, expect, it } from "vitest";
-import { MockCustomerRepository } from "../../adapters/express/repositories/postgres/MockCustomerRepository";
+import "reflect-metadata";
 import { CustomerController } from "./CustomerController";
+import { describe, expect, it } from "vitest";
+import { CreateCustomerService } from "../../usecases/customer/CreateCustomerService";
+import { ListCustomersService } from "../../usecases/customer/ListCustomersService";
+import { OptimizeRouteService } from "../../usecases/customer/OptimizeRouteService";
+import { MockCustomerRepository } from "../../adapters/express/repositories/postgres/MockCustomerRepository";
 import { Request } from "express";
 import { CustomerMapper } from "../../adapters/express/mappers/CustomerMapper";
 import { Customer } from "../../entities/Customer";
 
 describe("CustomerController", () => {
-  it("deve criar um cliente corretamente", async () => {
-    const mockRepository = new MockCustomerRepository();
-    const controller = new CustomerController(mockRepository);
+  const repository = new MockCustomerRepository();
 
+  repository.createCustomer(
+    CustomerMapper.toData(
+      new Customer("", "Client1", "client1@example.com", 10, 20)
+    )
+  );
+  repository.createCustomer(
+    CustomerMapper.toData(
+      new Customer("", "Client2", "client2@example.com", 15, 25)
+    )
+  );
+
+  const controller = new CustomerController(
+    new CreateCustomerService(repository),
+    new ListCustomersService(repository),
+    new OptimizeRouteService(repository)
+  );
+
+  it("deve criar um cliente corretamente", async () => {
     const request = {
       body: {
         name: "John Doe",
@@ -27,22 +47,9 @@ describe("CustomerController", () => {
   });
 
   it("deve listar clientes corretamente", async () => {
-    const mockRepository = new MockCustomerRepository();
-    mockRepository.createCustomer(
-      CustomerMapper.toData(
-        new Customer("", "Client1", "client1@example.com", 10, 20)
-      )
-    );
-    mockRepository.createCustomer(
-      CustomerMapper.toData(
-        new Customer("", "Client2", "client2@example.com", 15, 25)
-      )
-    );
-    const controller = new CustomerController(mockRepository);
-
     const result = await controller.listCustomer();
 
-    expect(result).toHaveLength(2);
+    expect(result).toHaveLength(3);
     expect(result[0].name).toEqual("Client1");
     expect(result[0].email).toEqual("client1@example.com");
     expect(result[1].name).toEqual("Client2");
@@ -50,19 +57,6 @@ describe("CustomerController", () => {
   });
 
   it("deve otimizar a rota corretamente", async () => {
-    const mockRepository = new MockCustomerRepository();
-    mockRepository.createCustomer(
-      CustomerMapper.toData(
-        new Customer("", "Client1", "client1@example.com", 10, 20)
-      )
-    );
-    mockRepository.createCustomer(
-      CustomerMapper.toData(
-        new Customer("", "Client2", "client2@example.com", 15, 25)
-      )
-    );
-    const controller = new CustomerController(mockRepository);
-
     const result = await controller.optimizeRoute();
 
     expect(Array.isArray(result)).toBe(true);
