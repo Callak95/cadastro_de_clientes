@@ -1,13 +1,11 @@
-// components/CustomerForm.tsx
-
-import React, { useState } from "react";
+import { FC, useState } from "react";
 import { Form } from "./styles";
 
 interface CustomerFormProps {
   onSubmit: (formData: FormData) => void;
 }
 
-const CustomerForm: React.FC<CustomerFormProps> = ({ onSubmit }) => {
+export const CustomerForm: FC<CustomerFormProps> = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -24,9 +22,20 @@ const CustomerForm: React.FC<CustomerFormProps> = ({ onSubmit }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget as HTMLFormElement);
-    onSubmit(formData);
-    setFormData({ name: "", email: "", xCoord: "", yCoord: "" });
+
+    // Crie uma nova instância de FormData
+    const formDataToSend = new FormData(e.currentTarget);
+
+    // Envie o formData
+    onSubmit(formDataToSend);
+
+    // Limpe o estado local
+    setFormData({
+      name: "",
+      email: "",
+      xCoord: "",
+      yCoord: "",
+    });
   };
 
   return (
@@ -34,19 +43,39 @@ const CustomerForm: React.FC<CustomerFormProps> = ({ onSubmit }) => {
       <h2>Formulário para cadastro de cliente</h2>
       <label>
         <span>Nome:</span>
-        <input type="text" value={formData.name} onChange={handleChange} />
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
       </label>
       <label>
         <span>E-mail:</span>
-        <input type="email" value={formData.email} onChange={handleChange} />
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
       </label>
       <label>
         <span>Coordenada X:</span>
-        <input type="text" value={formData.xCoord} onChange={handleChange} />
+        <input
+          type="text"
+          name="xCoord"
+          value={formData.xCoord}
+          onChange={handleChange}
+        />
       </label>
       <label>
         <span>Coordenada Y:</span>
-        <input type="text" value={formData.xCoord} onChange={handleChange} />
+        <input
+          type="text"
+          name="yCoord"
+          value={formData.yCoord}
+          onChange={handleChange}
+        />
       </label>
       <div>
         <button type="submit">Cadastrar Cliente</button>
@@ -54,5 +83,3 @@ const CustomerForm: React.FC<CustomerFormProps> = ({ onSubmit }) => {
     </Form>
   );
 };
-
-export default CustomerForm;
