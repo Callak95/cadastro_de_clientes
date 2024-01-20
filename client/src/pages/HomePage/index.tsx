@@ -3,7 +3,7 @@ import CustomerList from "../../components/CustomerList";
 import CustomerForm from "../../components/CustomerForm";
 import OptimizeRouteButton from "../../components/OptimizeRouteButtom";
 import { Customer } from "../../types/customer";
-import { Container } from "./styles";
+import { Container, Title } from "./styles";
 
 export const HomePage: FC = () => {
   const customers: Customer[] = [
@@ -35,7 +35,9 @@ export const HomePage: FC = () => {
 
   return (
     <Container>
-      <h1>Aplicação de Gerenciamento de Clientes</h1>
+      <Title>
+        <h1>Aplicação de Gerenciamento de Clientes</h1>
+      </Title>
 
       {/* Componente para listar clientes */}
       <CustomerList customers={customers} />

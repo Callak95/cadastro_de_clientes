@@ -24,3 +24,22 @@ export const Container = styled.div`
     max-width: 1140px;
   }
 `;
+
+export const Title = styled.div`
+  width: 100%;
+  height: auto;
+
+  padding: 0 0.5rem;
+  margin-left: -0.5rem;
+
+  border-radius: 0 0 0.8rem 0.8rem;
+
+  background-color: grey;
+
+  text-align: center;
+
+  h1 {
+    font-size: 1.9rem;
+    line-height: 4rem;
+  }
+`;
