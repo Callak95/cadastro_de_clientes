@@ -23,10 +23,11 @@ export const customerService = {
       const jsonData = JSON.stringify(customerData);
 
       const response = await axiosInstance.post("/customers", jsonData);
+
       return response.data;
     } catch (error) {
-      console.log("Erro ao cadastrar clientes:", (error as Error).message);
-      throw error;
+      console.error("Error in createCustomer:", error);
+      throw error; 
     }
   },
 
@@ -35,7 +36,7 @@ export const customerService = {
       const response = await axiosInstance.get("/customers");
       return response.data;
     } catch (error) {
-      console.log("Erro ao buscar clientes:", (error as Error).message);
+      console.error("Erro ao buscar clientes:", (error as Error).message);
       throw error;
     }
   },
@@ -45,7 +46,7 @@ export const customerService = {
       const response = await axiosInstance.get("/optimize-route");
       return response.data;
     } catch (error) {
-      console.log("Erro ao otimizar rota:", (error as Error).message);
+      console.error("Erro ao otimizar rota:", (error as Error).message);
       throw error;
     }
   },
