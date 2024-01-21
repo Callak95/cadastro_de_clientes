@@ -10,6 +10,7 @@ import { customerService } from "../../services/customerService";
 import { RootState } from "../../features";
 import { Customer } from "../../types/customer";
 import { StatusApplication } from "../../components/StatusApplication";
+import { AxiosError } from "axios";
 
 export const HomePage: FC = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,16 @@ export const HomePage: FC = () => {
         const response = await customerService.listCustomers();
         dispatch(setCustomers(response));
       } catch (error) {
-        setApiResults({ errors: [`Erro ao buscar clientes: ${((error as Error).message)}`] });
+        const err = error as AxiosError;
+        if (err.response) {
+          const responseData = err.response?.data as { error?: string } || {};
+
+          const errorMessage = responseData.error || 'Erro desconhecido';
+
+          setApiResults({ errors: [`Erro ao buscar clientes: ${errorMessage}`] });
+        } else {
+          console.error("Response object is missing in the error:", err);
+        }
       }
     };
 
@@ -46,7 +56,16 @@ export const HomePage: FC = () => {
       dispatch(setCustomers(await customerService.listCustomers()));
       setApiResults({ messages: [`Cliente ${response.name} cadastrado com sucesso!`] });
     } catch (error) {
-      setApiResults({ errors: [`Erro ao cadastrar cliente: ${((error as Error)).message}`] });
+      const err = error as AxiosError;
+      if (err.response) {
+        const responseData = err.response?.data as { error?: string } || {};
+
+        const errorMessage = responseData.error || 'Erro desconhecido';
+
+        setApiResults({ errors: [`Erro ao cadastrar cliente: ${errorMessage}`] });
+      } else {
+        console.error("Response object is missing in the error:", err);
+      }
     }
   };
 
@@ -56,7 +75,16 @@ export const HomePage: FC = () => {
       setListCustomers(optimizedCustomers);
       setApiResults({ messages: [`Rota otimizada com sucesso!`] });
     } catch (error) {
-      setApiResults({ errors: [`Erro ao otimizar a rota: ${((error as Error).message)}`] });
+      const err = error as AxiosError;
+      if (err.response) {
+        const responseData = err.response?.data as { error?: string } || {};
+
+        const errorMessage = responseData.error || 'Erro desconhecido';
+
+        setApiResults({ errors: [`Erro ao otimizar a rota: ${errorMessage}`] });
+      } else {
+        console.error("Response object is missing in the error:", err);
+      }
     }
   };
 
