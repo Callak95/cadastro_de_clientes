@@ -77,42 +77,26 @@ export class OptimizeRouteService implements IOptimizeRouteService {
 
   private validateCustomers(customers: Customer[]): void {
     if (customers.length < 2) {
-      throw new Error(
-        "É necessário pelo menos dois clientes para otimizar a rota"
-      );
+      throw new Error("É necessário pelo menos dois clientes para otimizar a rota");
     }
   }
 
   private validateCoordinates(coord: number | undefined): coord is number {
-    return typeof coord === "number" && !isNaN(coord);
+    return typeof coord === 'number' && !isNaN(coord);
   }
 
   private validateAndCalculateDistance(
     customer1: Customer,
     customer2: Customer
   ): number {
-    const x1 =
-      typeof customer1.xcoord === "string"
-        ? parseFloat(customer1.xcoord)
-        : undefined;
-    const y1 =
-      typeof customer1.ycoord === "string"
-        ? parseFloat(customer1.ycoord)
-        : undefined;
-    const x2 =
-      typeof customer2.xcoord === "string"
-        ? parseFloat(customer2.xcoord)
-        : undefined;
-    const y2 =
-      typeof customer2.ycoord === "string"
-        ? parseFloat(customer2.ycoord)
-        : undefined;
+    const x1 = typeof customer1.xcoord === 'string' ? parseFloat(customer1.xcoord) : undefined;
+    const y1 = typeof customer1.ycoord === 'string' ? parseFloat(customer1.ycoord) : undefined;
+    const x2 = typeof customer2.xcoord === 'string' ? parseFloat(customer2.xcoord) : undefined;
+    const y2 = typeof customer2.ycoord === 'string' ? parseFloat(customer2.ycoord) : undefined;
 
     if (
-      x1 !== undefined &&
-      y1 !== undefined &&
-      x2 !== undefined &&
-      y2 !== undefined &&
+      x1 !== undefined && y1 !== undefined &&
+      x2 !== undefined && y2 !== undefined &&
       this.validateCoordinates(x1) &&
       this.validateCoordinates(y1) &&
       this.validateCoordinates(x2) &&

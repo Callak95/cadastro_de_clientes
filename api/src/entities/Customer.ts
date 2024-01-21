@@ -6,6 +6,7 @@ export class Customer {
     public readonly id?: string,
     public readonly name?: string,
     public readonly email?: string,
+    public readonly phone?: string,
     public readonly xcoord?: number,
     public readonly ycoord?: number
   ) {
@@ -14,7 +15,7 @@ export class Customer {
   }
 
   private validateFields(): void {
-    if (!this.name || !this.email) {
+    if (!this.name || !this.email || !this.phone) {
       throw new Error("Todos os campos são obrigatórios");
     }
 

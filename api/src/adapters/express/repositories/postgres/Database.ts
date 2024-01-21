@@ -3,15 +3,9 @@ import { Pool, QueryResult, PoolClient } from "pg";
 
 config();
 
-if (
-  !process.env.DB_USER ||
-  !process.env.DB_HOST ||
-  !process.env.DB_DATABASE ||
-  !process.env.DB_PASSWORD
-) {
-  throw new Error(
-    "As variáveis de ambiente do banco de dados não estão configuradas corretamente."
-  );
+
+if (!process.env.DB_USER || !process.env.DB_HOST || !process.env.DB_DATABASE || !process.env.DB_PASSWORD) {
+  throw new Error("As variáveis de ambiente do banco de dados não estão configuradas corretamente.");
 }
 
 const dbPortStr = process.env.DB_PORT ?? "5432";

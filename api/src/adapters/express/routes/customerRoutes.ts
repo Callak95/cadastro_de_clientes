@@ -15,7 +15,7 @@ const router = express.Router();
 
 container.register<Database>("Database", {
   useClass: Database,
-});
+})
 
 container.register<ICustomerRepository>("ICustomerRepository", {
   useClass: PostgresCustomerRepository,
@@ -23,7 +23,7 @@ container.register<ICustomerRepository>("ICustomerRepository", {
 
 container.register<PostgresCustomerRepository>("PostgresCustomerRepository", {
   useClass: PostgresCustomerRepository,
-});
+})
 
 container.register<ICreateCustomerService>("ICreateCustomerService", {
   useClass: CreateCustomerService,

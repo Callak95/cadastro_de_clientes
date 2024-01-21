@@ -15,14 +15,13 @@ export class CreateCustomerService implements ICreateCustomerService {
   }
 
   public async execute(input: CreateCustomerInput): Promise<Customer> {
-    console.log(input);
-    const { name, email, xcoord, ycoord } = input;
+    const { name, email, phone, xcoord, ycoord } = input;
 
-    const newCustomer = new Customer("", name, email, xcoord, ycoord);
+    const newCustomer = new Customer("", name, email, phone, xcoord, ycoord);
 
     const createdCustomer =
       await this.customerRepository.createCustomer(newCustomer);
-
+    
     return createdCustomer;
   }
 }

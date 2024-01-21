@@ -35,7 +35,7 @@ export class CustomerController {
 
   public async listCustomer(): Promise<CustomerOutput[]> {
     const customers = await this.listCustomersService.execute();
-
+    
     const result = customers.map((customer) => CustomerMapper.toDTO(customer));
 
     return result;

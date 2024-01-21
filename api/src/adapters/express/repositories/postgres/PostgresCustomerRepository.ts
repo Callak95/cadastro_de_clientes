@@ -15,11 +15,12 @@ export class PostgresCustomerRepository implements ICustomerRepository {
 
   async createCustomer(customerData: CustomerData): Promise<Customer> {
     const result: QueryResult<Customer> = await this.database.query(
-      "INSERT INTO customers (id, name, email, xcoord, ycoord) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      "INSERT INTO customers (id, name, email, phone, xcoord, ycoord) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
       [
         customerData.id,
         customerData.name,
         customerData.email,
+        customerData.phone,
         customerData.xcoord,
         customerData.ycoord,
       ]
