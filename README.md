@@ -1,49 +1,49 @@
-# cadastro_de_clientes
+# Documentação do Projeto - Teste de Programação Desenvolvedor
 
-## Backend (Node.js + Express):
+## Facilita Jurídico
 
-### 1. Entidades:
+Este documento fornece informações essenciais sobre o projeto "Teste de Programação Desenvolvedor - Facilita Jurídico". Abaixo estão os detalhes sobre a estrutura do projeto, caminhos de acesso, e as bibliotecas utilizadas tanto no backend (API) quanto no frontend (Cliente).
 
-- `Customer.ts`: Define a entidade Customer com propriedades como id, name, email, phone, xCoord, yCoord.
+## Estrutura do Projeto
 
-### 2. Adapters:
+O projeto é dividido em duas partes principais: a API (backend) e o Cliente (frontend).
 
-- `express/routes/customerRoutes.ts`: Define as rotas relacionadas aos clientes utilizando Express.
-- `postgres/repositories/customerRepository.ts`: Implementa operações do banco de dados relacionadas aos clientes.
+### API (Backend)
 
-  #### Mappers:
+- **Caminho de Acesso:** `/api`
+- **Dependências:**
+  - **Desenvolvimento:**
+    - `dotenv`: ^16.3.1
+    - `eslint`: ^8.56.0
+    - `eslint-config-prettier`: ^9.1.0
+    - `nodemon`: ^3.0.3
+    - `prettier`: ^3.2.4
+    - `ts-node`: ^10.9.2
+    - `tsc`: ^2.0.4
+    - `typescript`: ^5.3.3
+    - `vitest`: ^1.2.1
+  - **Produção:**
+    - `cors`: ^2.8.5
+    - `express`: ^4.18.2
+    - `pg`: ^8.11.3
+    - `reflect-metadata`: ^0.2.1
+    - `tsyringe`: ^4.8.0
+    - `uuid`: ^9.0.1
 
-- `mappers/customerMapper.ts`: Converte dados do banco de dados para entidades e vice-versa.
+### Comandos para Teste, Build e Desenvolvimento
 
-### 3. Use Cases:
+#### API (Backend)
 
-- `usecases/customer/listCustomers.ts`: Lista os clientes. 
-- `usecases/customer/createCustomer.ts`: Cria um novo cliente.
-- `usecases/customer/optimizeRoute.ts`: Otimiza a rota de atendimento.
+1. Navegue até o diretório `/api`.
+2. Execute `npm install` para instalar as dependências.
+3. Execute `npm test` para realizar os testes.
+4. Execute `npm run build` para realizar o build da aplicação.
+5. Execute `npm run dev` para iniciar o servidor em modo de desenvolvimento.
 
-  #### Main:
+#### Cliente (Frontend)
 
-- `main.ts`: Inicializa o servidor Express e configura as rotas.
-
-## Frontend (React):
-
-### 1. Componentes:
-
-- `components/CustomerList.tsx`: Exibe a lista de clientes.
-- `components/CustomerForm.tsx`: Formulário para cadastrar novos clientes.- `components/OptimizeRouteButton.tsx`: Botão para otimizar a rota.
-
-### 2. Serviços:
-
-- `services/customerService.ts`: Realiza chamadas à API para manipulação de clientes.
-
-### 3. App:
-
-- `App.tsx`: Componente principal que renderiza os demais componentes.
-
-### 4. Observações:
-
-Cada pasta em `usecases/customer/` pode conter regras de negócios específicas para aquela ação.
-A camada adapters é responsável por lidar com frameworks e ferramentas externas (Express, PostgreSQL).
-A camada entities contém as entidades de negócio do sistema.
-A camada mappers converte dados entre formatos.
-Use `.env` para armazenar configurações sensíveis, como credenciais do banco de dados.
+1. Navegue até o diretório `/cliente`.
+2. Execute `npm install` para instalar as dependências.
+3. Execute `npm test` para realizar os testes.
+4. Execute `npm run build` para realizar o build da aplicação.
+5. Execute `npm run dev` para iniciar a aplicação frontend em modo de desenvolvimento.
