@@ -36,6 +36,7 @@ export const HomePage: FC = () => {
         xcoord: parseFloat(formData.get("xcoord") as string),
         ycoord: parseFloat(formData.get("ycoord") as string),
       });
+      dispatch(setCustomers(await customerService.listCustomers()));
       console.log(response);
     } catch (error) {
       console.error("Erro ao cadastrar clientes:", error);
