@@ -9,6 +9,7 @@ export const CustomerForm: FC<CustomerFormProps> = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     xcoord: "",
     ycoord: "",
   });
@@ -33,6 +34,7 @@ export const CustomerForm: FC<CustomerFormProps> = ({ onSubmit }) => {
     setFormData({
       name: "",
       email: "",
+      phone: "",
       xcoord: "",
       ycoord: "",
     });
@@ -56,6 +58,15 @@ export const CustomerForm: FC<CustomerFormProps> = ({ onSubmit }) => {
           type="email"
           name="email"
           value={formData.email}
+          onChange={handleChange}
+        />
+      </label>
+      <label>
+        <span>Telefone:</span>
+        <input
+          type="number"
+          name="phone"
+          value={formData.phone}
           onChange={handleChange}
         />
       </label>

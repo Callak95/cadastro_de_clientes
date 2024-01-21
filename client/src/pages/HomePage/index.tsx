@@ -9,11 +9,16 @@ import { setCustomers } from "../../features/customer/customerSlice";
 import { customerService } from "../../services/customerService";
 import { RootState } from "../../features";
 import { Customer } from "../../types/customer";
+import { StatusApplication } from "../../components/StatusApplication";
 
 export const HomePage: FC = () => {
   const dispatch = useDispatch();
   const customers = useSelector((state: RootState) => state.customer.customers);
-  const [listCustomer, setListCustomer] = useState<Customer[]>();
+  const [listCustomers, setListCustomers] = useState<Customer[]>();
+  const [apiResults, setApiResults] = useState<{ errors?: string[]; messages?: string[] }>({
+    errors: [],
+    messages: [],
+  });
 
   useEffect(() => {
     // Buscar clientes da API e atualizar o estado do Redux
@@ -22,7 +27,7 @@ export const HomePage: FC = () => {
         const response = await customerService.listCustomers();
         dispatch(setCustomers(response));
       } catch (error) {
-        console.error("Erro ao buscar clientes:", error);
+        setApiResults({ errors: [`Erro ao buscar clientes: ${((error as Error).message)}`] });
       }
     };
 
@@ -39,19 +44,19 @@ export const HomePage: FC = () => {
         ycoord: parseFloat(formData.get("ycoord") as string),
       });
       dispatch(setCustomers(await customerService.listCustomers()));
-      console.log(response);
+      setApiResults({ messages: [`Cliente ${response.name} cadastrado com sucesso!`] });
     } catch (error) {
-      console.error("Erro ao cadastrar clientes:", error);
+      setApiResults({ errors: [`Erro ao cadastrar cliente: ${((error as Error)).message}`] });
     }
   };
 
   const handleOptimizeRoute = async () => {
     try {
       const optimizedCustomers = await customerService.optimizeRoute();
-      setListCustomer(optimizedCustomers);
-      console.log("Rota otimizada!", optimizedCustomers);
+      setListCustomers(optimizedCustomers);
+      setApiResults({ messages: [`Rota otimizada com sucesso!`] });
     } catch (error) {
-      console.error("Erro ao otimizar a rota:", error);
+      setApiResults({ errors: [`Erro ao otimizar a rota: ${((error as Error).message)}`] });
     }
   };
 
@@ -60,6 +65,13 @@ export const HomePage: FC = () => {
       <Title>
         <h1>Aplicação de Gerenciamento de Clientes</h1>
       </Title>
+
+      {/* Componente para listar erros/sucesso na execução */}
+      <StatusApplication
+        errors={apiResults.errors}
+        messages={apiResults.messages}
+        setApiResults={setApiResults}
+      />
 
       {/* Componente para listar clientes */}
       <CustomerList customers={customers} />
@@ -72,7 +84,7 @@ export const HomePage: FC = () => {
 
       <div>
         <h1>Mapa de Clientes</h1>
-        <CustomerMap customers={listCustomer} />
+        <CustomerMap customers={listCustomers} />
       </div>
     </Container>
   );

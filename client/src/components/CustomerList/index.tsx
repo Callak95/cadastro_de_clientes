@@ -34,8 +34,7 @@ const CustomerList: React.FC<CustomerListProps> = ({ customers }) => {
         <ul>
           {customers.map((customer) => (
             <li key={customer.id}>
-              <strong>{customer.name}</strong> - {customer.email} -{" "}
-              {customer.phone} - {customer.xcoord} - {customer.ycoord}
+              <strong>Nome: {customer.name}</strong> - <strong>Email:</strong> {customer.email} - <strong>Telefone:</strong> {customer.phone}
             </li>
           ))}
         </ul>
