@@ -1,4 +1,5 @@
 import { FC } from "react";
+import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Customer } from "../../types/customer";
 
@@ -12,10 +13,10 @@ export const CustomerMap: FC<CustomerMapProps> = ({ customers }) => {
   return (
     <MapContainer
       center={[0, 0]}
-      zoom={3}
+      zoom={5}
       style={{ height: "500px", width: "100%" }}
     >
-      <TileLayer key={tileLayerUrl} url={tileLayerUrl} />
+      <TileLayer url={tileLayerUrl} />
       {customers.map((customer, index) => (
         <Marker
           key={index}
