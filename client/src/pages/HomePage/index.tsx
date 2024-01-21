@@ -46,7 +46,7 @@ export const HomePage: FC = () => {
 
   const handleSubmit = async (formData: FormData) => {
     try {
-      const response = await customerService.createCustomer({
+      await customerService.createCustomer({
         name: formData.get("name") as string,
         email: formData.get("email") as string,
         phone: formData.get("phone") as string,
@@ -54,7 +54,7 @@ export const HomePage: FC = () => {
         ycoord: parseFloat(formData.get("ycoord") as string),
       });
       dispatch(setCustomers(await customerService.listCustomers()));
-      setApiResults({ messages: [`Cliente ${response.name} cadastrado com sucesso!`] });
+      setApiResults({ messages: [`Cliente ${formData.get("name")} cadastrado com sucesso!`] });
     } catch (error) {
       const err = error as AxiosError;
       if (err.response) {
