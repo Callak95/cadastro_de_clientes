@@ -7,7 +7,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --watch 'src/' --exec 'ts-node src/main.ts' -e ts",
-    "test": "vitest"
+    "test": "vitest",
+    "build": "tsc",
+    "start": "node dist/main.js"
   },
   "devDependencies": {
     "@types/pg": "^8.10.9",
