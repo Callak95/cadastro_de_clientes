@@ -9,8 +9,8 @@ export class CustomerMapper {
       data.id,
       data.name,
       data.email,
-      data.xCoord,
-      data.yCoord
+      data.xcoord,
+      data.ycoord
     );
   }
 
@@ -19,29 +19,23 @@ export class CustomerMapper {
       id: entity.id,
       name: entity.name,
       email: entity.email,
-      xCoord: entity.xCoord,
-      yCoord: entity.yCoord,
+      xcoord: entity.xcoord,
+      ycoord: entity.ycoord,
     };
   }
 
   static toDTO(entity: Customer): CustomerOutput {
-    return {
-      id: entity.id,
-      name: entity.name,
-      email: entity.email,
-      xCoord: entity.xCoord,
-      yCoord: entity.yCoord,
-    };
+    return { ...entity };
   }
 
   static toCreateCustomerInput(requestBody: {
     id?: string;
     name?: string;
     email?: string;
-    xCoord?: number;
-    yCoord?: number;
+    xcoord?: number;
+    ycoord?: number;
   }): CreateCustomerInput {
-    const { id, name, email, xCoord, yCoord } = requestBody;
-    return { id, name, email, xCoord, yCoord };
+    const { id, name, email, xcoord, ycoord } = requestBody;
+    return { id, name, email, xcoord, ycoord };
   }
 }

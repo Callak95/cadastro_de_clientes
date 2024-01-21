@@ -17,6 +17,7 @@ export class OptimizeRouteService implements IOptimizeRouteService {
   }
 
   public optimizeRoute(customers: Customer[]): Customer[] {
+    this.validateCustomers(customers);
     const optimizedRoute = this.findShortestRoute(customers);
 
     return optimizedRoute.map((index) => customers[index]);
@@ -66,26 +67,61 @@ export class OptimizeRouteService implements IOptimizeRouteService {
       const customer1 = customers[permutation[i]];
       const customer2 = customers[permutation[i + 1]];
 
-      if (
-        customer1 &&
-        customer1.xCoord !== undefined &&
-        customer1.yCoord !== undefined &&
-        customer2 &&
-        customer2.xCoord !== undefined &&
-        customer2.yCoord !== undefined
-      ) {
-        totalDistance += this.calculateDistance(
-          customer1.xCoord,
-          customer1.yCoord,
-          customer2.xCoord,
-          customer2.yCoord
-        );
-      } else {
-        throw new Error("Coordenadas inválidas para calcular a distância");
-      }
+      this.validateCustomers([customer1, customer2]);
+
+      totalDistance += this.validateAndCalculateDistance(customer1, customer2);
     }
 
     return totalDistance;
+  }
+
+  private validateCustomers(customers: Customer[]): void {
+    if (customers.length < 2) {
+      throw new Error(
+        "É necessário pelo menos dois clientes para otimizar a rota"
+      );
+    }
+  }
+
+  private validateCoordinates(coord: number | undefined): coord is number {
+    return typeof coord === "number" && !isNaN(coord);
+  }
+
+  private validateAndCalculateDistance(
+    customer1: Customer,
+    customer2: Customer
+  ): number {
+    const x1 =
+      typeof customer1.xcoord === "string"
+        ? parseFloat(customer1.xcoord)
+        : undefined;
+    const y1 =
+      typeof customer1.ycoord === "string"
+        ? parseFloat(customer1.ycoord)
+        : undefined;
+    const x2 =
+      typeof customer2.xcoord === "string"
+        ? parseFloat(customer2.xcoord)
+        : undefined;
+    const y2 =
+      typeof customer2.ycoord === "string"
+        ? parseFloat(customer2.ycoord)
+        : undefined;
+
+    if (
+      x1 !== undefined &&
+      y1 !== undefined &&
+      x2 !== undefined &&
+      y2 !== undefined &&
+      this.validateCoordinates(x1) &&
+      this.validateCoordinates(y1) &&
+      this.validateCoordinates(x2) &&
+      this.validateCoordinates(y2)
+    ) {
+      return this.calculateDistance(x1, y1, x2, y2);
+    } else {
+      throw new Error("Coordenadas inválidas para calcular a distância");
+    }
   }
 
   private permute(array: number[]): number[][] {
