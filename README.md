@@ -72,6 +72,22 @@ O projeto é dividido em duas partes principais: a API (backend) e o Cliente (fr
 
 Para executar o projeto, siga as instruções abaixo:
 
+#### Banco de dados
+
+Em `./api/migrations` encontrace o arquivo `001_create_table_clientes.sql`, rode o arquivo em seu banco de dados postgres.
+ 
+Logo em seguida altere o nome do arquivo `.env.test` para `.env`, inclua os valores para o seu banco de dados.
+
+```bash
+PORT=8001
+
+DB_USER=seu-db-user
+DB_HOST=-seu-db-host
+DB_DATABASE=-databasename
+DB_PASSWORD=-seu-db-password
+DB_PORT=-db-port
+```
+
 #### API (Backend)
 
 1. Navegue até o diretório `/api`.
