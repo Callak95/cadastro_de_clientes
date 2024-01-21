@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import CustomerList from "../../components/CustomerList";
 import { CustomerForm } from "../../components/CustomerForm";
 import OptimizeRouteButton from "../../components/OptimizeRouteButtom";
@@ -8,10 +8,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCustomers } from "../../features/customer/customerSlice";
 import { customerService } from "../../services/customerService";
 import { RootState } from "../../features";
+import { Customer } from "../../types/customer";
 
 export const HomePage: FC = () => {
   const dispatch = useDispatch();
   const customers = useSelector((state: RootState) => state.customer.customers);
+  const [listCustomer, setListCustomer] = useState<Customer[]>();
 
   useEffect(() => {
     // Buscar clientes da API e atualizar o estado do Redux
@@ -46,7 +48,7 @@ export const HomePage: FC = () => {
   const handleOptimizeRoute = async () => {
     try {
       const optimizedCustomers = await customerService.optimizeRoute();
-      dispatch(setCustomers(optimizedCustomers));
+      setListCustomer(optimizedCustomers);
       console.log("Rota otimizada!", optimizedCustomers);
     } catch (error) {
       console.error("Erro ao otimizar a rota:", error);
@@ -70,7 +72,7 @@ export const HomePage: FC = () => {
 
       <div>
         <h1>Mapa de Clientes</h1>
-        <CustomerMap customers={customers} />
+        <CustomerMap customers={listCustomer} />
       </div>
     </Container>
   );
