@@ -77,13 +77,15 @@ Para executar o projeto, siga as instruções abaixo:
 1. Navegue até o diretório `/api`.
 2. Execute `npm install` para instalar as dependências.
 3. Execute `npm test` para realizar os testes.
-4. Execute `npm run build` para realizar o build da aplicação.
-5. Execute `npm run dev` para iniciar o servidor em modo de desenvolvimento.
+4. Execute `npm run dev` para iniciar o servidor em modo de desenvolvimento.
+5. Execute `npm run build` para realizar o build da aplicação.
+6. Execute `npm start` para iniciar o servidor em modo de produção.
 
 #### Cliente (Frontend)
 
 1. Navegue até o diretório `/cliente`.
 2. Execute `npm install` para instalar as dependências.
-3. Execute `npm test` para realizar os testes.
-4. Execute `npm run build` para realizar o build da aplicação.
-5. Execute `npm run dev` para iniciar a aplicação frontend em modo de desenvolvimento.
+3. Execute `npm dev` para iniciar o servidor de desenvolvimento usando Vite.
+4. Execute `npm run build` para compilar e constróir o projeto usando TypeScript (tsc) e Vite.
+5. Execute `npm run lint` para executar o ESLint para linting do código TypeScript e TypeScript React.
+6. Execute `npm run previl` para Iniciar o servidor de visualização usando Vite.
