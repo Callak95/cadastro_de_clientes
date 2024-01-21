@@ -32,8 +32,9 @@ export const HomePage: FC = () => {
       const response = await customerService.createCustomer({
         name: formData.get("name") as string,
         email: formData.get("email") as string,
-        xCoord: parseFloat(formData.get("xCoord") as string),
-        yCoord: parseFloat(formData.get("yCoord") as string),
+        phone: formData.get("phone") as string,
+        xcoord: parseFloat(formData.get("xcoord") as string),
+        ycoord: parseFloat(formData.get("ycoord") as string),
       });
       console.log(response);
     } catch (error) {

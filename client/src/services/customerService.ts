@@ -1,30 +1,52 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:8001";
+const API_BASE_URL = "http://localhost:8001/api";
 
 interface CustomerData {
   name: string;
   email: string;
-  xCoord: number;
-  yCoord: number;
+  phone: string;
+  xcoord: number;
+  ycoord: number;
 }
+
+const axiosInstance = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 export const customerService = {
   async createCustomer(customerData: CustomerData) {
-    const response = await axios.post(
-      `${API_BASE_URL}/customers`,
-      customerData
-    );
-    return response.data;
+    try {
+      const jsonData = JSON.stringify(customerData);
+
+      const response = await axiosInstance.post("/customers", jsonData);
+      return response.data;
+    } catch (error) {
+      console.log("Erro ao cadastrar clientes:", (error as Error).message);
+      throw error;
+    }
   },
 
   async listCustomers() {
-    const response = await axios.get(`${API_BASE_URL}/customers`);
-    return response.data;
+    try {
+      const response = await axiosInstance.get("/customers");
+      return response.data;
+    } catch (error) {
+      console.log("Erro ao buscar clientes:", (error as Error).message);
+      throw error;
+    }
   },
 
   async optimizeRoute() {
-    const response = await axios.get(`${API_BASE_URL}/optimize-route`);
-    return response.data;
+    try {
+      const response = await axiosInstance.get("/optimize-route");
+      return response.data;
+    } catch (error) {
+      console.log("Erro ao otimizar rota:", (error as Error).message);
+      throw error;
+    }
   },
 };

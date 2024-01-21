@@ -19,7 +19,7 @@ export const CustomerMap: FC<CustomerMapProps> = ({ customers }) => {
       {customers.map((customer, index) => (
         <Marker
           key={index}
-          position={[parseFloat(customer.yCoord), parseFloat(customer.xCoord)]}
+          position={[parseFloat(customer.ycoord), parseFloat(customer.xcoord)]}
         >
           <Popup>{customer.name}</Popup>
         </Marker>

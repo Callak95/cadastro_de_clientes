@@ -1,5 +1,3 @@
-// components/CustomerList.tsx
-
 import React, { useEffect, useState } from "react";
 import { Customer } from "../../types/customer";
 import { Container } from "./styles";
@@ -36,7 +34,8 @@ const CustomerList: React.FC<CustomerListProps> = ({ customers }) => {
         <ul>
           {customers.map((customer) => (
             <li key={customer.id}>
-              <strong>{customer.name}</strong> - {customer.email}
+              <strong>{customer.name}</strong> - {customer.email} -{" "}
+              {customer.phone} - {customer.xcoord} - {customer.ycoord}
             </li>
           ))}
         </ul>

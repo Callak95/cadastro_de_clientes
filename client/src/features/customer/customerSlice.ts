@@ -4,8 +4,9 @@ interface Customer {
   id?: string;
   name: string;
   email: string;
-  xCoord: string;
-  yCoord: string;
+  phone: string;
+  xcoord: string;
+  ycoord: string;
 }
 
 interface CustomerState {

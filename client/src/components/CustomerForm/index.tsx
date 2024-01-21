@@ -9,8 +9,8 @@ export const CustomerForm: FC<CustomerFormProps> = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    xCoord: "",
-    yCoord: "",
+    xcoord: "",
+    ycoord: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,8 +33,8 @@ export const CustomerForm: FC<CustomerFormProps> = ({ onSubmit }) => {
     setFormData({
       name: "",
       email: "",
-      xCoord: "",
-      yCoord: "",
+      xcoord: "",
+      ycoord: "",
     });
   };
 
@@ -63,8 +63,8 @@ export const CustomerForm: FC<CustomerFormProps> = ({ onSubmit }) => {
         <span>Coordenada X:</span>
         <input
           type="text"
-          name="xCoord"
-          value={formData.xCoord}
+          name="xcoord"
+          value={formData.xcoord}
           onChange={handleChange}
         />
       </label>
@@ -72,8 +72,8 @@ export const CustomerForm: FC<CustomerFormProps> = ({ onSubmit }) => {
         <span>Coordenada Y:</span>
         <input
           type="text"
-          name="yCoord"
-          value={formData.yCoord}
+          name="ycoord"
+          value={formData.ycoord}
           onChange={handleChange}
         />
       </label>
