@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 // Configuração das rotas relacionadas aos clientes
 app.use("/api", customerRoutes);
 
-// Rota de status para verificar se o servidor está ativo.
+// Rota de status para verificar se o servidor está ativo
 app.get("/status", (req, res) => {
   res.status(200).json({ status: "Server is running" });
 });
