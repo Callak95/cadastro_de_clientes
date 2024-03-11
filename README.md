@@ -1,4 +1,4 @@
-# Documentação do Projeto - Teste de Programação Desenvolvedor
+# Documentação do Projeto - Teste de Programação Desenvolvedor.
 
 ## Facilita Jurídico
 
